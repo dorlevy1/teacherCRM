@@ -12,4 +12,9 @@ class Classes extends Model
     protected $guarded =[];
 
 
+
+    public function teachers(){
+
+        return $this->belongsToMany(Teacher::class,'class_teacher','id','class_id');
+    }
 }

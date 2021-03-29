@@ -14,12 +14,10 @@ class CreateClassTeacherTable extends Migration
     public function up()
     {
         Schema::create('class_teacher', function (Blueprint $table) {
-            $table->primary(['teacher_id','class_id']);
+            $table->id();
             $table->unsignedInteger('teacher_id');
             $table->unsignedInteger('class_id');
             $table->timestamps();
-
-
         });
     }
 
