@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\User;
 class TeacherFactory extends Factory
 {
     /**
@@ -22,7 +22,9 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => function(){
+            return User::factory()->create()->id;
+            }
         ];
     }
 }
