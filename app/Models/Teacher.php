@@ -22,6 +22,6 @@ class Teacher extends Model
     }
 
     public function students(){
-        return $this->hasMany(Student::class,'teacher_id');
+        return $this->hasMany(Student::class,'teacher_id','user_id');
     }
 }
