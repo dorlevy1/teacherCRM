@@ -23,7 +23,7 @@ class TeacherFactory extends Factory
     {
         return [
             'user_id' => function(){
-            return User::factory()->create()->id;
+                return User::factory()->create()->id;
             }
         ];
     }

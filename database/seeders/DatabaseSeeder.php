@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([TeacherTableSeeder::class,ClassesSeeder::class]);
-        $this->command->info('TeacherTable seeded!');
+        $this->call(ClassTeacherSeeder::class);
+        $this->command->info('ClassTeacherSeeder seeded!');
     }
 }
