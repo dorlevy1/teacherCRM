@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDetail extends Model
+class Meeting extends Model
 {
     use HasFactory;
 
+    protected $table = 'meeting_class';
 
-    protected $table = 'user_details';
 }

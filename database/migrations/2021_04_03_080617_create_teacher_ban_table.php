@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLeadsSuccessTeacherTable extends Migration
+class CreateTeacherBanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateLeadsSuccessTeacherTable extends Migration
      */
     public function up()
     {
-        Schema::create('leads_success_teacher', function (Blueprint $table) {
+        Schema::create('teacher_ban', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('teacher_id');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateLeadsSuccessTeacherTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leads_success_teacher');
+        Schema::dropIfExists('teacher_ban');
     }
 }

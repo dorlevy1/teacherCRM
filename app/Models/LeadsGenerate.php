@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDetail extends Model
+class LeadsGenerate extends Model
 {
     use HasFactory;
 
+    protected $table = 'leads_generate';
 
-    protected $table = 'user_details';
 }
