@@ -14,7 +14,7 @@ class Student extends Model
 
 
     public function class(){
-        return $this->belongsToMany(Classes::class,'class_student','student_id','clas_id');
+        return $this->belongsToMany(Classes::class,'class_student','student_id','class_id');
     }
 
     public function user(){
@@ -24,5 +24,10 @@ class Student extends Model
     public function teacher(){
 
         return $this->belongsTo(Teacher::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
     }
 }
