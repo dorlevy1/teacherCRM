@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
-use App\Models\ClassStudent;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\UserDetail;
@@ -26,28 +25,25 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-
+        // Create new User
         $new_user = User::create($request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required'
         ]));
 
-       $student = $new_user->teacher->students->create($request->validate([
+        // Create new Student
+        $student = $new_user->teacher->students->create($request->validate([
             'name' => 'required',
         ]));
 
-       $class = $new_user->teacher->class->create($request->validate([
-            'name'=>'required',
-        ]));
+        // Attach class to user in class_student table
+        Student::find($student->id)->class->attach($request->validate(['class_id' => 'required']));
 
-       Classes::find($class->id)->students->attach($student->id);
-
-        Student::find($student->id)->class->attach($class->id);
-
-        $user_details = new UserDetail($request->validate([
+        // Create new row on user_detail with the details of the current student
+        $user_detail = new UserDetail($request->validate([
             'user_id' => $new_user->id,
-            'class_id' => $class->id,
+            'class_id' => 'required',
             'name' => $new_user->name,
             'age' => 'required|numeric',
             'phone' => 'required',
@@ -56,8 +52,8 @@ class StudentController extends Controller
             'private_notes' => '',
         ]));
 
-        $user_details->save();
-
+        // Save new $user_detail
+        $user_detail->save();
 
 
     }

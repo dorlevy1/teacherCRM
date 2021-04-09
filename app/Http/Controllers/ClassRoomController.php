@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
-use App\Models\Student;
 use App\Models\Teacher;
-use App\Models\UserDetail;
 use Illuminate\Http\Request;
 
 class ClassRoomController extends Controller
