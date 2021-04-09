@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\ClassStudent;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -22,9 +24,8 @@ class StudentController extends Controller
 
     }
 
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
-
 
         $new_user = User::create($request->validate([
             'name' => 'required',
@@ -32,16 +33,19 @@ class StudentController extends Controller
             'password' => 'required'
         ]));
 
-        $user->teacher->students->create($request->validate([
+       $student = $new_user->teacher->students->create($request->validate([
             'name' => 'required',
-            'user_id' => $new_user->id,
         ]));
 
-        $class = $new_user->student->class->create($request->validate([
-            'class_id' => 'required',
+       $class = $new_user->teacher->class->create($request->validate([
+            'name'=>'required',
         ]));
 
-        UserDetail::create($request->validate([
+       Classes::find($class->id)->students->attach($student->id);
+
+        Student::find($student->id)->class->attach($class->id);
+
+        $user_details = new UserDetail($request->validate([
             'user_id' => $new_user->id,
             'class_id' => $class->id,
             'name' => $new_user->name,
@@ -50,8 +54,10 @@ class StudentController extends Controller
             'city' => 'required',
             'gender' => 'required',
             'private_notes' => '',
-        ])
-        );
+        ]));
+
+        $user_details->save();
+
 
 
     }

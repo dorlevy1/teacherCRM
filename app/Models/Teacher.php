@@ -16,6 +16,10 @@ class Teacher extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function class(){
+        return $this->hasMany(Classes::class);
+    }
+
     public function classes(){
 
         return $this->belongsToMany(Classes::class,'class_teacher','teacher_id','class_id');
